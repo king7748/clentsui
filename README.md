@@ -1,2 +1,2 @@
 # clentsui
-gui
+this is made for clent
