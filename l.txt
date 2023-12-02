@@ -1,0 +1,98 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+OrionLib:MakeNotification({
+	Name = "Orion Example",
+	Content = "Orion Example",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+
+local Window = OrionLib:MakeWindow({Name = "Orion Example", HidePremium = false, SaveConfig = true, ConfigFolder = "Orion"})
+
+--Player Tab--
+
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local PlayerSection = PlayerTab:AddSection({
+	Name = "Player"
+})
+
+
+PlayerSection:AddSlider({
+	Name = "Walkspeed",
+	Min = 16,
+	Max = 100,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Walkspeed",
+	Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+--Player Tab End--
+
+--Settings Tab--
+
+local SettingsTab = Window:MakeTab({
+	Name = "Settings",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local SettingsSection = SettingsTab:AddSection({
+	Name = "Settings"
+})
+
+SettingsSection:AddButton({
+	Name = "Destroy UI",
+	Callback = function()
+        OrionLib:Destroy()
+  	end    
+})
+
+--Settings End--
+
+--executor tab--
+
+local ExecutorSection = Window:MakeTab({
+	Name = "Executor",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local ExecutorSection = ExecutorTab:AddSection({
+        Name = "Executor"
+})
+
+
+ExecutorSection:AddButton({
+        Name = "executor",
+        Callback = function()
+        local textBox = Instance.new("TextBox")
+    textBox.Size = UDim2.new(1, 0, 0.8, 0)
+    textBox.Position = UDim2.new(0, 0, 0.1, 0)
+    textBox.Text = "Enter Lua script here..."
+    textBox.Parent = frame
+
+    local executeButton = Instance.new("TextButton")
+    executeButton.Size = UDim2.new(0.5, 0, 0.1, 0)
+    executeButton.Position = UDim2.new(0.25, 0, 0.9, 0)
+    executeButton.Text = "Execute"
+    executeButton.Parent = frame
+
+    executeButton.MouseButton1Click:Connect(function()
+        local script = textBox.Text
+        HttpService:PostAsync("http://your-roblox-game-server.com/api/executescript", script)
+    end)
+end
+        end
+})
+
+OrionLib:Init() --UI Lib End
